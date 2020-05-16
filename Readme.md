@@ -2,8 +2,13 @@ For Backend
 
 SET environment variable \$GOPATH="path_to/e2eproject/Backend/src
 
-Create the "pictureperfect" database in mysql
-Change the database usename and password in \$GOPATH/API/Catalogue/DAO/moviedao/movieConstants.go
+For setting database
+
+1. Create the "pictureperfect" database in mysql
+2. Change the database usename and password in \$GOPATH/API/Catalogue/DAO/moviedao/movieConstants.go
+3. Comment mapURL() line and uncomment the TMDB api function
+4. build the project and run it
+5. Undo the comments after database population
 
 Third party go packages:
 
