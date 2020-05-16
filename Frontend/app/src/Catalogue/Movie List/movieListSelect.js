@@ -4,20 +4,9 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import Style from "./movieListSelectStyle";
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-    width: "30%",
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-  select: {
-    width: "100%",
-  },
-}));
+const useStyles = makeStyles((theme) => Style);
 
 const selectOption = (props) => {
   const classes = useStyles();

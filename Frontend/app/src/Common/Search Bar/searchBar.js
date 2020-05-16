@@ -1,25 +1,15 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
-//import Grid from "@material-ui/core/Grid";
 import Aux from "../../hoc/auxilory";
-//import Search from "@material-ui/icons/Search";
 import SearchIcon from "@material-ui/icons/Search";
 import ClearIcon from "@material-ui/icons/Clear";
 import Button from "@material-ui/core/Button";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import { Link } from "react-router-dom";
-const style = {
-  button: {
-    marginTop: "10px",
-    marginRight: "5px",
-    paddingTop: "13px",
-    paddingBottom: "13px",
-    outline: "none",
-    width: "7.5%",
-    minWidth: 80,
-  },
-};
+import Style from "./searchBarStyle";
+
+const style = Style;
 
 const searchBar = (props) => {
   let clearSearchButton = null;

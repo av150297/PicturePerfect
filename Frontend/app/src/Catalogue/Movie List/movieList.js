@@ -12,7 +12,6 @@ import Pagination from "../../Common/Paginate/paginate";
 import Backdrop from "../../Common/Backdrop/backdrop";
 import { filterParameters } from "./movieListHelper";
 const movieList = (props) => {
-  console.log("Movie List:", props.parameters);
   const params = filterParameters(props.parameters);
   const [state, setState] = useState({
     page: params.page,
@@ -26,7 +25,6 @@ const movieList = (props) => {
   }, [state]);
   let loading = null;
   if (props.loading) {
-    console.log("Loading");
     loading = <Backdrop />;
   } else {
     loading = null;
@@ -57,60 +55,56 @@ const movieList = (props) => {
 
   return (
     <Aux>
-      <div>
-        <Row>
-          <Col>
-            <SearchBar
-              value={searchBarState}
-              onChangeHandler={(event) =>
-                Handler.onChangeHandler(setSearchBarState, event)
-              }
-              submitHandler={() =>
-                Handler.submitHandler(searchBarState, state, setState)
-              }
-              search={state.search}
-              searchBarState={searchBarState}
-              clearSearchHandler={() =>
-                Handler.clearSearchHandler(state, setState, setSearchBarState)
-              }
-              page={state.page}
-            />
-          </Col>
-        </Row>
-        {loading}
-        <Row>
-          <Col>
-            <Select
-              attribute={state.attribute}
-              attributeHandler={(event) =>
-                Handler.attributeHandler(state, setState, event)
-              }
-              sort={state.sort}
-              sortHandler={(event) =>
-                Handler.sortHandler(state, setState, event)
-              }
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col>{searchTitle}</Col>
-        </Row>
+      <Row>
+        <Col>
+          <SearchBar
+            value={searchBarState}
+            onChangeHandler={(event) =>
+              Handler.onChangeHandler(setSearchBarState, event)
+            }
+            submitHandler={() =>
+              Handler.submitHandler(searchBarState, state, setState)
+            }
+            search={state.search}
+            searchBarState={searchBarState}
+            clearSearchHandler={() =>
+              Handler.clearSearchHandler(state, setState, setSearchBarState)
+            }
+            page={state.page}
+          />
+        </Col>
+      </Row>
+      {loading}
+      <Row>
+        <Col>
+          <Select
+            attribute={state.attribute}
+            attributeHandler={(event) =>
+              Handler.attributeHandler(state, setState, event)
+            }
+            sort={state.sort}
+            sortHandler={(event) => Handler.sortHandler(state, setState, event)}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col>{searchTitle}</Col>
+      </Row>
 
-        <MovieCard movies={props.movies} />
+      <MovieCard movies={props.movies} />
 
-        <Row>
-          <Col>
-            <Pagination
-              pageChangeHandler={(event, value) =>
-                Handler.pageChangeHandler(state, setState, value)
-              }
-              page={state.page}
-              pageCount={props.last_page}
-              search={searchBarState}
-            />
-          </Col>
-        </Row>
-      </div>
+      <Row>
+        <Col>
+          <Pagination
+            pageChangeHandler={(event, value) =>
+              Handler.pageChangeHandler(state, setState, value)
+            }
+            page={state.page}
+            pageCount={props.last_page}
+            search={searchBarState}
+          />
+        </Col>
+      </Row>
     </Aux>
   );
 };

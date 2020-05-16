@@ -12,7 +12,7 @@ import (
 func main() {
 
 	//Uncomment these two line to read movie list from TDMB API upto that particular page
-	// pageNumber := 4
+	// pageNumber := 3
 	// moviedao.ReadTMDB(pageNumber)
 
 	mapURLs()

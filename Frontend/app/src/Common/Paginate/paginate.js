@@ -3,28 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Pagination from "@material-ui/lab/Pagination";
 import PaginationItem from "@material-ui/lab/PaginationItem";
 import { Link } from "react-router-dom";
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      minWidth: 500,
-      maxWidth: 500,
-      width: "40%",
-      marginTop: theme.spacing(2),
-      textAlign: "center",
-      marginLeft: "auto",
-      marginRight: "auto",
-      marginDown: "10px",
-    },
-    "&:hover,:focus": {
-      outline: "none",
-    },
-  },
-  link: {
-    "&:hover": {
-      textDecoration: "none",
-    },
-  },
-}));
+import Style from "./paginateStyle";
+
+const useStyles = makeStyles(Style);
 
 const pagination = (props) => {
   const classes = useStyles();
@@ -42,7 +23,6 @@ const pagination = (props) => {
           color="primary"
           onChange={props.pageChangeHandler}
           renderItem={(item) => {
-            console.log("Item:", item.page);
             let paginationItem = null;
             if (item.page && item.page <= props.pageCount) {
               paginationItem = (
