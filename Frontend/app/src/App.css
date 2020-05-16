@@ -1,0 +1,16 @@
+.main {
+    overflow-x: hidden;
+    margin-top: 60px;
+    font-family: "Roberto", sans-serif;
+    margin-left: 20px;
+    overflow-x: "hidden";
+}
+
+body {
+    font-family: "Roberto", sans-serif;
+}
+
+@font-face {
+    font-family: "Roberto";
+    src: url("./Roboto-Light.ttf") format("truetype");
+}
