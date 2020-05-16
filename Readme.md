@@ -13,8 +13,10 @@ Third party go packages:
 4. "github.com/jinzhu/gorm"
 
 In the \$GOPATH folder Run:
-go build
-then src.exe(for windows) or ./src(for linux)
+
+1. go build
+   then src.exe(for windows) or ./src(for linux)
+2. run "npm start" in the "Frontend/app/" folder
 
 Third Party Javascript Package:
 
