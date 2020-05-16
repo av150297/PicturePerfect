@@ -5,8 +5,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Style from "./movieListSelectStyle";
-
-const useStyles = makeStyles((theme) => Style);
+const useStyles = makeStyles((theme) => Style(theme));
 
 const selectOption = (props) => {
   const classes = useStyles();
