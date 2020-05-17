@@ -7,6 +7,8 @@ import NavigationBar from "./Common/Navigation Bar/navigationBar";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import queryString from "query-string";
 import Footer from "./Common/Footer/footer";
+import ErrorAlerts from "./Common/Alert/error";
+import * as errors from "./Common/Constants/errorConstants";
 
 class App extends Component {
   render() {
@@ -29,8 +31,17 @@ class App extends Component {
                   exact
                   render={(props) => {
                     let params = queryString.parse(props.location.search);
-                    console.log("Inside Route", params);
-                    return <MovieList parameters={params} />;
+                    if (params.page && isNaN(params.page)) {
+                      return (
+                        <ErrorAlerts>{errors.INVALID_PAGE_ERROR}</ErrorAlerts>
+                      );
+                    } else if (params.page && params.page > errors.THRESHOLD) {
+                      return (
+                        <ErrorAlerts>{errors.PAGE_COUNT_ERROR}</ErrorAlerts>
+                      );
+                    } else {
+                      return <MovieList parameters={params} />;
+                    }
                   }}
                 />
                 <Route

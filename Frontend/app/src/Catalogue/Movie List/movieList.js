@@ -26,8 +26,6 @@ const movieList = (props) => {
   let loading = null;
   if (props.loading) {
     loading = <Backdrop />;
-  } else {
-    loading = null;
   }
   if (params.search !== state.search || params.page !== state.page) {
     if (params.search !== state.search) {

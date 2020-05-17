@@ -19,6 +19,7 @@ const movieListReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        error: null,
       };
     case movieListActionTypes.FETCH_MOVIES_START:
       return {

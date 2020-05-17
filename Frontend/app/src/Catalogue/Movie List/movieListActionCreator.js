@@ -28,7 +28,6 @@ export const fetchMovieListSuccess = () => {
 };
 
 export const getMovieList = (state) => {
-  //console.log("Inside Get Movies", page, sort, search);
   return (dispatch) => {
     dispatch(fetchMovieListStart());
     axios
@@ -36,14 +35,12 @@ export const getMovieList = (state) => {
         params: state,
       })
       .then((response) => {
-        console.log(response.data);
         dispatch(fetchMovielist(response.data));
       })
       .then(() => {
         dispatch(fetchMovieListSuccess());
       })
       .catch((error) => {
-        console.log(error);
         dispatch(fetchMovieListError(error));
       });
   };
