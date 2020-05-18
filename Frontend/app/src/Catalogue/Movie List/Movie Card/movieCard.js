@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Row, Col } from "react-bootstrap";
 import Aux from "../../../hoc/auxilory";
-import { IMAGE_BASE_URL } from "../../../Utility/constants";
+import { IMAGE_BASE_URL } from "../../../Common/Constants/URLConstants";
 import Image from "react-bootstrap/Image";
 import { Link } from "react-router-dom";
 import Style from "./movieCardStyle";
