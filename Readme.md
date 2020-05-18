@@ -8,7 +8,7 @@ For setting database
 2. Change the database usename and password in \$GOPATH/API/Catalogue/DAO/moviedao/movieConstants.go
 3. Comment mapURL() line and uncomment the TMDB api function
 4. build the project and run it
-5. Undo the comments after database population
+5. Undo the comments after database population and rebuild the program and run it.
 
 Third party go packages:
 
