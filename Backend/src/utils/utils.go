@@ -1,12 +1,10 @@
 package utils
 
 import (
-	"fmt"
 	"net/http"
 )
 
-//EnableCors Function to enable Cors
+//EnableCors Function to enable Cors for cross origin API communication
 func EnableCors(w *http.ResponseWriter) {
-	fmt.Println("Utility Called")
 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 }

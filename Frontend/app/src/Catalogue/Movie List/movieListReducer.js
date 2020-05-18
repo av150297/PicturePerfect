@@ -1,5 +1,6 @@
 import * as movieListActionTypes from "./movieListActionTypes";
 
+//Initial State for movie list component
 const initialState = {
   loading: true,
   movies: [],

@@ -11,15 +11,17 @@ import Typography from "@material-ui/core/Typography";
 import Pagination from "../../Common/Paginate/paginate";
 import Backdrop from "../../Common/Backdrop/backdrop";
 import { filterParameters } from "./movieListHelper";
+
+//MovieList Component to display the list of movies
 const movieList = (props) => {
-  const params = filterParameters(props.parameters);
+  const params = filterParameters(props.parameters); //filter the parameters paased in the url
   const [state, setState] = useState({
     page: params.page,
     sort: 1,
     search: params.search,
     attribute: "release_date",
-  });
-  const [searchBarState, setSearchBarState] = useState("");
+  }); //Default State for the component
+  const [searchBarState, setSearchBarState] = useState(""); //Default state for search bar
   useEffect(() => {
     props.fetchMovies(state);
   }, [state]);
@@ -94,9 +96,6 @@ const movieList = (props) => {
       <Row>
         <Col>
           <Pagination
-            pageChangeHandler={(event, value) =>
-              Handler.pageChangeHandler(state, setState, value)
-            }
             page={state.page}
             pageCount={props.last_page}
             search={searchBarState}

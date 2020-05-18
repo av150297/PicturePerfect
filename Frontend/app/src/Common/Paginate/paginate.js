@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Style from "./paginateStyle";
 import * as LinkConstants from "../Constants/linkConstants";
 const useStyles = makeStyles(Style);
-
+//Component for the pagination
 const pagination = (props) => {
   const classes = useStyles();
   const paramHandler = (params) => {

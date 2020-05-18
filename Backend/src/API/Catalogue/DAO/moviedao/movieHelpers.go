@@ -31,6 +31,7 @@ func getAllMovies(page int, sort int, search string, attribute string) MovieList
 	return movieList
 }
 
+//function to retrive all the parameter from the URL
 func getParameters(r *http.Request) (int, int, string, string) {
 	page := 1
 	sort := 0

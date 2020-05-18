@@ -1,5 +1,6 @@
 import * as movieListActionTypes from "./movieListActionTypes";
 import axios from "../../hoc/axios";
+
 export const fetchMovielist = (data) => {
   return {
     type: movieListActionTypes.FETCH_MOVIES,

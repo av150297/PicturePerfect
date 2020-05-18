@@ -1,13 +1,11 @@
 package home
 
 import (
-	utils "utils"
-	"fmt"
 	"net/http"
+	utils "utils"
 )
 
+//HomePage dummy function for testing
 func HomePage(w http.ResponseWriter, r *http.Request) {
 	utils.EnableCors(&w)
-	fmt.Fprint(w, "Welcome to Homepage")
-	fmt.Println("HomePage Loaded")
 }

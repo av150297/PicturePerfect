@@ -36,15 +36,6 @@ export const attributeHandler = (state, setState, event) => {
     });
 };
 
-export const pageChangeHandler = (state, setState, value) => {
-  // if (state.page !== value) {
-  //   setState({
-  //     ...state,
-  //     page: value,
-  //   });
-  // }
-};
-
 export const onChangeHandler = (setSearchBarState, event) => {
   setSearchBarState(event.target.value);
 };

@@ -15,12 +15,13 @@ import Style from "./movieCardStyle";
 import * as LinkConstants from "../../../Common/Constants/linkConstants";
 
 const useStyles = makeStyles(Style);
-
+//MovieCard display the card of the movie description
 const movieCard = (props) => {
   const classes = useStyles();
   let card = null;
   if (props.movies.length) {
     const length = props.movies.length;
+    //Eight movies will be displayed per page
     for (let i = 0; i < 8; i++) {
       if (i < length) {
         card = (

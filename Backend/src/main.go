@@ -18,6 +18,7 @@ func main() {
 	mapURLs()
 }
 
+//mapURLS function maps the URLS to its corresponsind components
 func mapURLs() {
 	router := mux.NewRouter()
 	router.HandleFunc("/", home.HomePage) //Dummy HomePage

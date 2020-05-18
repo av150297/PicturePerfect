@@ -6,7 +6,7 @@ import (
 	"utils"
 )
 
-//MovieImplementation Function
+//MovieImplementation Function for movie list request
 func MovieImplementation(w http.ResponseWriter, r *http.Request) {
 	utils.EnableCors(&w)
 	page, sort, search, attribute := getParameters(r)

@@ -1,3 +1,4 @@
+//Helper functions for movie list component
 export const filterParameters = (params) => {
   let page = 1;
   if (params.page) {

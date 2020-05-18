@@ -13,7 +13,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-//saveImage function to save the poster
+//saveImage function to save the poster image
 func (movie Movie) saveImage() {
 	filename := movie.Image
 	response, httperr := http.Get(IMAGEBASEURL + filename)
