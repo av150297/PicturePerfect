@@ -36,3 +36,5 @@ Third Party Javascript Package:
 9. @material-ui/icons
 10. react-bootstrap
 11. bootstrap
+
+Note: Internet Connection is required.

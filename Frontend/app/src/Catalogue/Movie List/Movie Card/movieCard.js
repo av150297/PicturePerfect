@@ -12,6 +12,7 @@ import { IMAGE_BASE_URL } from "../../../Utility/constants";
 import Image from "react-bootstrap/Image";
 import { Link } from "react-router-dom";
 import Style from "./movieCardStyle";
+import * as LinkConstants from "../../../Common/Constants/linkConstants";
 
 const useStyles = makeStyles(Style);
 
@@ -54,7 +55,9 @@ const movieCard = (props) => {
                     {props.movies[i].original_language}
                   </Button>
                   <Link
-                    to={"/movies/catalogue/" + props.movies[i].movie_id}
+                    to={
+                      LinkConstants.MOVIE_LIST + "/" + props.movies[i].movie_id
+                    }
                     className={classes.link}
                   >
                     <Button

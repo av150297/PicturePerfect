@@ -8,7 +8,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import { Link } from "react-router-dom";
 import Style from "./searchBarStyle";
-
+import * as LinkConstants from "../Constants/linkConstants";
 const style = Style;
 
 const searchBar = (props) => {
@@ -17,7 +17,7 @@ const searchBar = (props) => {
     clearSearchButton = (
       <Link
         to={{
-          pathname: "/movies/catalogue",
+          pathname: LinkConstants.MOVIE_LIST,
           search: "?page=1",
         }}
       >
@@ -62,7 +62,7 @@ const searchBar = (props) => {
 
       <Link
         to={{
-          pathname: "/movies/catalogue",
+          pathname: LinkConstants.MOVIE_LIST,
           search:
             props.searchBarState !== ""
               ? paramHandler({ search: props.searchBarState, page: 1 })

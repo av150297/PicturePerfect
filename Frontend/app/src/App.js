@@ -9,6 +9,7 @@ import queryString from "query-string";
 import Footer from "./Common/Footer/footer";
 import ErrorAlerts from "./Common/Alert/error";
 import * as errors from "./Common/Constants/errorConstants";
+import * as LinkConstants from "./Common/Constants/linkConstants";
 
 class App extends Component {
   render() {
@@ -20,14 +21,14 @@ class App extends Component {
             <div>
               <Switch>
                 <Route
-                  path="/"
+                  path={LinkConstants.HOME_PAGE}
                   exact
                   render={() => {
                     return <h1>Yet to be implemented</h1>;
                   }}
                 />
                 <Route
-                  path="/movies/catalogue"
+                  path={LinkConstants.MOVIE_LIST}
                   exact
                   render={(props) => {
                     let params = queryString.parse(props.location.search);
@@ -35,7 +36,10 @@ class App extends Component {
                       return (
                         <ErrorAlerts>{errors.INVALID_PAGE_ERROR}</ErrorAlerts>
                       );
-                    } else if (params.page && params.page > errors.THRESHOLD) {
+                    } else if (
+                      params.page &&
+                      (params.page > errors.THRESHOLD || params.page < 1)
+                    ) {
                       return (
                         <ErrorAlerts>{errors.PAGE_COUNT_ERROR}</ErrorAlerts>
                       );
@@ -45,28 +49,34 @@ class App extends Component {
                   }}
                 />
                 <Route
-                  path="/movies/catalogue/:movie_id"
+                  path={LinkConstants.MOVIE_DESCRIPTION}
                   exact
                   render={() => {
                     return <h1>Yet to be implemented</h1>;
                   }}
                 />
                 <Route
-                  path="/movies/shows"
+                  path={LinkConstants.MOVIE_SHOWS}
                   exact
                   render={() => {
                     return <h1>Yet to be implemented</h1>;
                   }}
                 />
                 <Route
-                  path="/login"
+                  path={LinkConstants.LOGIN}
                   exact
                   render={() => {
                     return <h1>Yet to be implemented</h1>;
                   }}
                 />
                 <Route
-                  path="/"
+                  path={LinkConstants.ABOUT_US}
+                  exact
+                  render={() => {
+                    return <h1>Yet to be implemented</h1>;
+                  }}
+                />
+                <Route
                   render={() => {
                     return <h1>Invalid request</h1>;
                   }}

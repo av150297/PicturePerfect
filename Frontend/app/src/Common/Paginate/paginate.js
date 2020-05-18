@@ -4,7 +4,7 @@ import Pagination from "@material-ui/lab/Pagination";
 import PaginationItem from "@material-ui/lab/PaginationItem";
 import { Link } from "react-router-dom";
 import Style from "./paginateStyle";
-
+import * as LinkConstants from "../Constants/linkConstants";
 const useStyles = makeStyles(Style);
 
 const pagination = (props) => {
@@ -28,7 +28,7 @@ const pagination = (props) => {
               paginationItem = (
                 <Link
                   to={{
-                    pathname: "/movies/catalogue",
+                    pathname: LinkConstants.MOVIE_LIST,
                     search:
                       props.search === ""
                         ? paramHandler({ page: item.page })
