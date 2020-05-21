@@ -1,6 +1,7 @@
 package moviedao
 
 import (
+	"API/Catalogue/DAO/tvshowsdao"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -44,7 +45,7 @@ func (list MovieList) save(index int) {
 	db.AutoMigrate(&Movie{})
 	for _, movie := range list.List {
 		db.Debug().Create(&movie)
-		movie.saveImage()
+		//movie.saveImage()
 	}
 }
 
@@ -52,25 +53,31 @@ func (list MovieList) save(index int) {
 func ReadTMDB(pageNumber int) {
 	for index := 1; index <= pageNumber; index++ {
 		client := http.Client{}
-		apiurl := fmt.Sprintf(APIURL, APIKEY, index)
-		fmt.Println(apiurl)
-		request, httperr := http.NewRequest(http.MethodGet, apiurl, nil)
+		movieAPIUrl := fmt.Sprintf(APIURL, "movie", APIKEY, index)
+		tvShowsAPIUrl := fmt.Sprintf(APIURL, "tv", APIKEY, index)
+		movieRequest, httperr := http.NewRequest(http.MethodGet, movieAPIUrl, nil)
+		tvShowRequest, httperr := http.NewRequest(http.MethodGet, tvShowsAPIUrl, nil)
 		if httperr != nil {
 			log.Fatal(httperr)
 		}
-		response, geterr := client.Do(request)
+		movieResponse, geterr := client.Do(movieRequest)
+		tvShowResponse, geterr := client.Do(tvShowRequest)
 		if geterr != nil {
 			log.Fatal(geterr)
 		}
-		body, readerr := ioutil.ReadAll(response.Body)
+		movieBody, readerr := ioutil.ReadAll(movieResponse.Body)
+		tvShowBody, readerr := ioutil.ReadAll(tvShowResponse.Body)
 		if readerr != nil {
 			log.Fatal(readerr)
 		}
-		lst := MovieList{}
-		jsonerr := json.Unmarshal(body, &lst)
+		movieList := MovieList{}
+		tvShowList := tvshowsdao.TvShowList{}
+		jsonerr := json.Unmarshal(movieBody, &movieList)
+		jsonerr = json.Unmarshal(tvShowBody, &tvShowList)
 		if jsonerr != nil {
 			log.Fatal(jsonerr)
 		}
-		lst.save(index)
+		movieList.save(index)
+		tvShowList.Save(index)
 	}
 }

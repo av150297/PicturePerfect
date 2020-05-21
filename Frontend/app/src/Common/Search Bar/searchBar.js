@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Aux from "../../hoc/auxilory";
 import SearchIcon from "@material-ui/icons/Search";
@@ -9,20 +9,31 @@ import IconButton from "@material-ui/core/IconButton";
 import { Link } from "react-router-dom";
 import Style from "./searchBarStyle";
 import * as LinkConstants from "../Constants/linkConstants";
+import * as Handlers from "../../Catalogue/Movie List/movieListHandler";
 const style = Style;
 
 const searchBar = (props) => {
+  const [searchBarState, setSearchBarState] = useState(""); //Default state for search bar
   let clearSearchButton = null;
-  if (props.search !== "") {
+  if (props.state.search !== "") {
     clearSearchButton = (
       <Link
         to={{
-          pathname: LinkConstants.MOVIE_LIST,
+          pathname:
+            props.type === "movies"
+              ? LinkConstants.MOVIE_LIST
+              : LinkConstants.TV_SHOWS,
           search: "?page=1",
         }}
       >
         <IconButton
-          onClick={props.clearSearchHandler}
+          onClick={() =>
+            Handlers.clearSearchHandler(
+              props.state,
+              props.setState,
+              setSearchBarState
+            )
+          }
           style={{ outline: "none" }}
         >
           <ClearIcon fontSize="medium" />
@@ -39,10 +50,14 @@ const searchBar = (props) => {
     <Aux>
       <TextField
         id="search_bar"
-        label="search"
-        value={props.value}
-        style={{ margin: 8, width: "53%" }}
-        placeholder="Search your movies here"
+        label="Search"
+        value={searchBarState}
+        style={{ margin: 10, width: "53%" }}
+        placeholder={
+          props.type === "movies"
+            ? "Search your movies here"
+            : "Search your shows here"
+        }
         margin="normal"
         autoComplete="off"
         InputProps={{
@@ -57,15 +72,18 @@ const searchBar = (props) => {
           shrink: true,
         }}
         variant="outlined"
-        onChange={props.onChangeHandler}
+        onChange={(event) => Handlers.onChangeHandler(setSearchBarState, event)}
       />
 
       <Link
         to={{
-          pathname: LinkConstants.MOVIE_LIST,
+          pathname:
+            props.type === "movies"
+              ? LinkConstants.MOVIE_LIST
+              : LinkConstants.TV_SHOWS,
           search:
-            props.searchBarState !== ""
-              ? paramHandler({ search: props.searchBarState, page: 1 })
+            searchBarState !== ""
+              ? paramHandler({ search: searchBarState, page: 1 })
               : paramHandler({ page: props.page }),
         }}
       >

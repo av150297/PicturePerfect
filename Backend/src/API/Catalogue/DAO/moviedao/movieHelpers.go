@@ -9,8 +9,8 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-//function to retrieve all movies on particular page
-func getAllMovies(page int, sort int, search string, attribute string) MovieList {
+//GetAllMovies function to retrieve all movies on particular page
+func GetAllMovies(page int, sort int, search string, attribute string, limit int) MovieList {
 	db, dberr := gorm.Open("mysql", DATABASEURL)
 	if dberr != nil {
 		log.Fatal(dberr)
@@ -26,7 +26,7 @@ func getAllMovies(page int, sort int, search string, attribute string) MovieList
 	var count int
 	db.Table("movies").Where("title like ?", search).Count(&count)
 	movieList := MovieList{}
-	db.Debug().Order(sortString).Limit(PAGELIMIT).Offset((page-1)*PAGELIMIT).Where("title like ?", search).Find(&movieList.List)
+	db.Debug().Order(sortString).Limit(limit).Offset((page-1)*PAGELIMIT).Where("title like ?", search).Find(&movieList.List)
 	movieList.LastPage = (count + PAGELIMIT - 1) / PAGELIMIT
 	return movieList
 }

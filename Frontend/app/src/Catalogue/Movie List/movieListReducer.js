@@ -3,7 +3,7 @@ import * as movieListActionTypes from "./movieListActionTypes";
 //Initial State for movie list component
 const initialState = {
   loading: true,
-  movies: [],
+  data: [],
   error: null,
 };
 
@@ -12,7 +12,7 @@ const movieListReducer = (state = initialState, action) => {
     case movieListActionTypes.FETCH_MOVIES:
       return {
         ...state,
-        movies: action.movies,
+        data: action.data,
         last_page: action.last_page,
         error: null,
       };

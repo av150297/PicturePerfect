@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => Style(theme));
 
 const selectOption = (props) => {
   const classes = useStyles();
-
   return (
     <div>
       <FormControl variant="outlined" className={classes.formControl}>
@@ -25,19 +24,27 @@ const selectOption = (props) => {
           label="Attribute"
           className={classes.select}
         >
-          <MenuItem value="title">Title</MenuItem>
-          <MenuItem value="release_date">Release Date</MenuItem>
-          <MenuItem value="movie_id">Movie Id</MenuItem>
+          <MenuItem value={props.type === "movies" ? "title" : "name"}>
+            {props.type === "movies" ? "Title" : "Name"}
+          </MenuItem>
+          <MenuItem
+            value={props.type === "movies" ? "release_date" : "first_air_date"}
+          >
+            {props.type === "movies" ? "Release Date" : "First Air Date"}
+          </MenuItem>
+          <MenuItem value={props.type === "movies" ? "movie_id" : "show_id"}>
+            {props.type === "movies" ? "Movie Id" : "Show Id"}
+          </MenuItem>
         </Select>
       </FormControl>
       <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Order</InputLabel>
+        <InputLabel id="demo-simple-select-outlined-label">Sort</InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           value={props.sort}
           onChange={props.sortHandler}
-          label="order"
+          label="Sort"
           className={classes.select}
         >
           <MenuItem value="0">Ascending</MenuItem>

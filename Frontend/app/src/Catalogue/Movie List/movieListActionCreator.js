@@ -4,7 +4,7 @@ import axios from "../../hoc/axios";
 export const fetchMovielist = (data) => {
   return {
     type: movieListActionTypes.FETCH_MOVIES,
-    movies: data.results,
+    data: data.results,
     last_page: data.last_page,
   };
 };
@@ -28,11 +28,12 @@ export const fetchMovieListSuccess = () => {
   };
 };
 
-export const getMovieList = (state) => {
+export const getMovieList = (state, type) => {
   return (dispatch) => {
     dispatch(fetchMovieListStart());
+    console.log("/" + type + "/catalogue");
     axios
-      .get("/movies/catalogue", {
+      .get("/" + type + "/catalogue", {
         params: state,
       })
       .then((response) => {

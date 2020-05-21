@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import * as movieListActionCreator from "./movieListActionCreator";
 import Aux from "../../hoc/auxilory";
-import MovieCard from "./Movie Card/movieCard";
+import MovieCards from "./Movie Card/movieCards";
 import SearchBar from "../../Common/Search Bar/searchBar";
 import * as Handler from "./movieListHandler";
 import { Row, Col } from "react-bootstrap";
@@ -11,6 +11,8 @@ import Typography from "@material-ui/core/Typography";
 import Pagination from "../../Common/Paginate/paginate";
 import Backdrop from "../../Common/Backdrop/backdrop";
 import { filterParameters } from "./movieListHelper";
+import classes from "./movieList.css";
+import ErrorAlerts from "../../Common/Alert/error";
 
 //MovieList Component to display the list of movies
 const movieList = (props) => {
@@ -21,10 +23,9 @@ const movieList = (props) => {
     search: params.search,
     attribute: "release_date",
   }); //Default State for the component
-  const [searchBarState, setSearchBarState] = useState(""); //Default state for search bar
   useEffect(() => {
-    props.fetchMovies(state);
-  }, [state]);
+    props.fetchMovies(state, props.type);
+  }, [state, props.type]);
   let loading = null;
   if (props.loading) {
     loading = <Backdrop />;
@@ -52,56 +53,57 @@ const movieList = (props) => {
       </Typography>
     );
   }
+  let error_message = null;
+  if (props.error) {
+    error_message = <ErrorAlerts>Something went wrong !</ErrorAlerts>;
+  }
 
   return (
     <Aux>
-      <Row>
-        <Col>
-          <SearchBar
-            value={searchBarState}
-            onChangeHandler={(event) =>
-              Handler.onChangeHandler(setSearchBarState, event)
-            }
-            submitHandler={() =>
-              Handler.submitHandler(searchBarState, state, setState)
-            }
-            search={state.search}
-            searchBarState={searchBarState}
-            clearSearchHandler={() =>
-              Handler.clearSearchHandler(state, setState, setSearchBarState)
-            }
-            page={state.page}
-          />
-        </Col>
-      </Row>
-      {loading}
-      <Row>
-        <Col>
-          <Select
-            attribute={state.attribute}
-            attributeHandler={(event) =>
-              Handler.attributeHandler(state, setState, event)
-            }
-            sort={state.sort}
-            sortHandler={(event) => Handler.sortHandler(state, setState, event)}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col>{searchTitle}</Col>
-      </Row>
+      <div className={classes.main}>
+        <Row>
+          <Col>
+            <SearchBar
+              page={state.page}
+              type="movies"
+              state={state}
+              setState={setState}
+            />
+          </Col>
+        </Row>
+        {loading}
+        <Row>
+          <Col>
+            <Select
+              attribute={state.attribute}
+              attributeHandler={(event) =>
+                Handler.attributeHandler(state, setState, event)
+              }
+              sort={state.sort}
+              sortHandler={(event) =>
+                Handler.sortHandler(state, setState, event)
+              }
+              type={props.type}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col>{searchTitle}</Col>
+        </Row>
+        {error_message}
+        <MovieCards data={props.data} type={props.type} />
 
-      <MovieCard movies={props.movies} />
-
-      <Row>
-        <Col>
-          <Pagination
-            page={state.page}
-            pageCount={props.last_page}
-            search={searchBarState}
-          />
-        </Col>
-      </Row>
+        <Row>
+          <Col>
+            <Pagination
+              page={state.page}
+              pageCount={props.last_page}
+              search={state.search}
+              type="movies"
+            />
+          </Col>
+        </Row>
+      </div>
     </Aux>
   );
 };
@@ -109,7 +111,7 @@ const movieList = (props) => {
 const mapStateToProps = (state) => {
   return {
     loading: state.movieList.loading,
-    movies: state.movieList.movies,
+    data: state.movieList.data,
     last_page: state.movieList.last_page,
     error: state.movieList.error,
   };
@@ -117,8 +119,8 @@ const mapStateToProps = (state) => {
 
 const mapDisptachToProps = (dispatch) => {
   return {
-    fetchMovies: (state) =>
-      dispatch(movieListActionCreator.getMovieList(state)),
+    fetchMovies: (state, type) =>
+      dispatch(movieListActionCreator.getMovieList(state, type)),
   };
 };
 

@@ -11,7 +11,7 @@ const style = {
 const navigationBar = (props) => {
   return (
     <Aux>
-      <Navbar bg="dark" variant="dark" fixed="top">
+      <Navbar bg="dark" variant="dark" sticky>
         <Navbar.Brand href={LinkConstants.HOME_PAGE}>
           PicturePerfect
         </Navbar.Brand>
@@ -25,7 +25,13 @@ const navigationBar = (props) => {
           >
             <Nav.Link href="#movieList">Movies</Nav.Link>
           </Link>
-          <Link to={LinkConstants.MOVIE_SHOWS} style={style}>
+          <Link
+            to={{
+              pathname: LinkConstants.TV_SHOWS,
+              search: "?page=1",
+            }}
+            style={style}
+          >
             <Nav.Link href="#shows">Shows</Nav.Link>
           </Link>
         </Nav>

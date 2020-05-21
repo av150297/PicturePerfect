@@ -1,8 +1,51 @@
 .footer {
-    background-color: white;
+    background-color: #333333;
     color: white;
+    padding: 17px;
+    padding-bottom: 15px;
+    margin-top: 10px;
 }
 
 .text {
     text-align: center;
+}
+
+.facebook {
+    margin: 0px 10px;
+}
+
+.facebook:hover {
+    color: #3b5999;
+}
+
+.instagram {
+    margin: 0px 5px;
+}
+
+.instagram:hover {
+    color: #e4405f;
+}
+
+.linkedin {
+    margin: 0px 5px;
+}
+
+.linkedin:hover {
+    color: #0077B5;
+}
+
+.twitter {
+    margin: 0px 5px;
+}
+
+.twitter:hover {
+    color: #55acee;
+}
+
+.pinterest {
+    margin: 0px 5px;
+}
+
+.pinterest:hover {
+    color: #bd081c;
 }

@@ -7,7 +7,7 @@ const PAGELIMIT = 8
 const APIKEY = "381193835c01836af08b2b8b05341ae5"
 
 //APIURL for API
-const APIURL = "https://api.themoviedb.org/3/movie/popular?api_key=%s&page=%d"
+const APIURL = "https://api.themoviedb.org/3/%s/popular?api_key=%s&page=%d"
 
 //IMAGEBASEURL for poster Images
 const IMAGEBASEURL = "https://image.tmdb.org/t/p/w500/"

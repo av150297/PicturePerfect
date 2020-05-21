@@ -36,6 +36,22 @@ const style = {
       textDecoration: "none",
     },
   },
+  title: {
+    maxHeight: 32,
+    overflow: "hidden",
+    transitionProperty: "max-height",
+    transitionDuration: "0.5s",
+    "&:hover": {
+      maxHeight: 70,
+    },
+  },
+  cardcontent: {
+    outline: "none",
+    "&:focus": {
+      outline: "none",
+      textDecoration: "none",
+    },
+  },
 };
 
 export default style;

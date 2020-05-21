@@ -2,7 +2,8 @@ package main
 
 import (
 	"API/Catalogue/DAO/moviedao"
-	"API/home"
+	"API/Catalogue/DAO/tvshowsdao"
+	"API/homepage"
 	"log"
 	"net/http"
 
@@ -12,7 +13,7 @@ import (
 func main() {
 
 	//Uncomment these two line to read movie list from TDMB API upto that particular page
-	// pageNumber := 3
+	// pageNumber := 4
 	// moviedao.ReadTMDB(pageNumber)
 
 	mapURLs()
@@ -21,8 +22,9 @@ func main() {
 //mapURLS function maps the URLS to its corresponsind components
 func mapURLs() {
 	router := mux.NewRouter()
-	router.HandleFunc("/", home.HomePage) //Dummy HomePage
+	router.HandleFunc("/", homepage.Implementation)
 	router.HandleFunc("/movies/catalogue", moviedao.MovieImplementation)
+	router.HandleFunc("/tvshows/catalogue", tvshowsdao.TvShowsImplementation)
 	log.Println("Running on port 3001")
 	log.Panic(http.ListenAndServe(":3001", router))
 }
