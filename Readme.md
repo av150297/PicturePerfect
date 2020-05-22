@@ -5,9 +5,9 @@ SET environment variable \$GOPATH="path_to/e2eproject/Backend/src
 For setting database
 
 1. Create the "pictureperfect" database in mysql
-2. Change the database usename and password in \$GOPATH/API/Catalogue/DAO/moviedao/movieConstants.go
+2. Change the database username and password in \$GOPATH/utils/constants.go
 3. Comment mapURL() line and uncomment the TMDB api function
-4. build the project and run it
+4. build the project in main.go folder and run it
 5. Undo the comments after database population and rebuild the program and run it.
 
 Third party go packages:
