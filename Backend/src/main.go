@@ -14,7 +14,7 @@ func main() {
 
 	//Uncomment these two line to read movie list from TDMB API upto that particular page
 	// pageNumber := 4
-	// moviedao.ReadTMDB(pageNumber)
+	// tmdbdao.ReadTMDB(pageNumber)
 
 	mapURLs()
 }

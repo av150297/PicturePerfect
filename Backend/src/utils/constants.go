@@ -3,6 +3,9 @@ package utils
 //PAGELIMIT variable to display the number of movies on a page
 const PAGELIMIT = 8
 
+//HOMEPAGELIMIT variable to display the number of cards in homepage
+const HOMEPAGELIMIT = 6
+
 //APIKEY for TMDB API
 const APIKEY = "381193835c01836af08b2b8b05341ae5"
 

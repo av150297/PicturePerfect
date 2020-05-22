@@ -13,11 +13,7 @@ const footer = (props) => {
     <Row className={classes.footer}>
       <Col className={classes.text}>
         Follow us on:
-        <Facebook
-          href="www.facebook.com"
-          fontSize="large"
-          className={classes.facebook}
-        />
+        <Facebook fontSize="large" className={classes.facebook} />
         <Instagram fontSize="large" className={classes.instagram} />
         <LinkedIn fontSize="large" className={classes.linkedin} />
         <Twitter fontSize="large" className={classes.twitter} />

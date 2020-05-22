@@ -1,14 +1,15 @@
 package homepage
 
 import (
-	"API/Catalogue/DAO/moviedao"
 	"log"
+	utils "utils"
 
+	_ "github.com/go-sql-driver/mysql" //SQL Driver
 	"github.com/jinzhu/gorm"
 )
 
 func (data *Data) getData(limit int) {
-	db, dberr := gorm.Open("mysql", moviedao.DATABASEURL)
+	db, dberr := gorm.Open("mysql", utils.DATABASEURL)
 	if dberr != nil {
 		log.Fatal("Database error")
 	}

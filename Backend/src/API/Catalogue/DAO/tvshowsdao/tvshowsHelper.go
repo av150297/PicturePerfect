@@ -4,6 +4,7 @@ import (
 	"log"
 	"utils"
 
+	_ "github.com/go-sql-driver/mysql" //SQL Driver
 	"github.com/jinzhu/gorm"
 )
 

@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-//function to retrive all the parameter from the URL
+//GetParameters function to retrive all the parameter from the URL
 func GetParameters(r *http.Request) (int, int, string, string) {
 	page := 1
 	sort := 0
@@ -37,4 +37,9 @@ func GetParameters(r *http.Request) (int, int, string, string) {
 		attribute = attributeQuery[0]
 	}
 	return page, sort, search, attribute
+}
+
+//EnableCors Function to enable Cors for cross origin API communication
+func EnableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 }

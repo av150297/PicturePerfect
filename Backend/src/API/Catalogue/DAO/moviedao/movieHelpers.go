@@ -1,17 +1,16 @@
 package moviedao
 
 import (
-	"fmt"
 	"log"
-	"net/http"
-	"strconv"
+	"utils"
 
+	_ "github.com/go-sql-driver/mysql" //SQL Driver
 	"github.com/jinzhu/gorm"
 )
 
 //GetAllMovies function to retrieve all movies on particular page
-func GetAllMovies(page int, sort int, search string, attribute string, limit int) MovieList {
-	db, dberr := gorm.Open("mysql", DATABASEURL)
+func GetAllMovies(page int, sort int, search string, attribute string) MovieList {
+	db, dberr := gorm.Open("mysql", utils.DATABASEURL)
 	if dberr != nil {
 		log.Fatal(dberr)
 	}
@@ -26,40 +25,23 @@ func GetAllMovies(page int, sort int, search string, attribute string, limit int
 	var count int
 	db.Table("movies").Where("title like ?", search).Count(&count)
 	movieList := MovieList{}
-	db.Debug().Order(sortString).Limit(limit).Offset((page-1)*PAGELIMIT).Where("title like ?", search).Find(&movieList.List)
-	movieList.LastPage = (count + PAGELIMIT - 1) / PAGELIMIT
+	db.Debug().Order(sortString).Limit(utils.PAGELIMIT).Offset((page-1)*utils.PAGELIMIT).Where("title like ?", search).Find(&movieList.List)
+	movieList.LastPage = (count + utils.PAGELIMIT - 1) / utils.PAGELIMIT
 	return movieList
 }
 
-//function to retrive all the parameter from the URL
-func getParameters(r *http.Request) (int, int, string, string) {
-	page := 1
-	sort := 0
-	search := ""
-	attribute := "title"
-	pageQuery, ok := r.URL.Query()["page"]
-	fmt.Println("Page Query", pageQuery)
-	if ok {
-		pageNumber, strerr := strconv.Atoi(pageQuery[0])
-		if strerr == nil {
-			fmt.Println("Enter")
-			page = pageNumber
-		}
+//Save function to save all the movies
+func (list MovieList) Save(index int) {
+	db, dberr := gorm.Open("mysql", utils.DATABASEURL)
+	defer db.Close()
+	if dberr != nil {
+		log.Fatal(dberr)
 	}
-	sortQuery, ok := r.URL.Query()["sort"]
-	if ok {
-		sortOrder, streerr := strconv.Atoi(sortQuery[0])
-		if streerr == nil {
-			sort = sortOrder
-		}
+	if index == 1 {
+		db.Debug().DropTableIfExists(&Movie{})
 	}
-	searchQuery, ok := r.URL.Query()["search"]
-	if ok {
-		search = searchQuery[0]
+	db.AutoMigrate(&Movie{})
+	for _, movie := range list.List {
+		db.Debug().Create(&movie)
 	}
-	attributeQuery, ok := r.URL.Query()["attribute"]
-	if ok {
-		attribute = attributeQuery[0]
-	}
-	return page, sort, search, attribute
 }
