@@ -3,11 +3,14 @@ import { createLogger } from "redux-logger";
 import thunk from "redux-thunk";
 import movieListReducer from "./Catalogue/Movie List/movieListReducer";
 import homePageReducer from "./Catalogue/Home Page/homePageReducer";
-
+import movieReducer from "./Catalogue/Movie Info/Movie/movieReducer";
+import reviewReducer from "./Catalogue/Movie Info/Reviews/reviewsReducer";
 //rootReducer to combine all the reducers from different components
 const rootReducer = combineReducers({
   movieList: movieListReducer,
   homePage: homePageReducer,
+  movie: movieReducer,
+  reviews: reviewReducer,
 });
 
 //Redux store to manage the state globally

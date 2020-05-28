@@ -11,7 +11,12 @@ const style = {
 const navigationBar = (props) => {
   return (
     <Aux>
-      <Navbar bg="dark" variant="dark" sticky>
+      <Navbar
+        bg="dark"
+        variant="dark"
+        sticky
+        style={{ width: "100%", minWidth: 467 }}
+      >
         <Navbar.Brand href={LinkConstants.HOME_PAGE}>
           PicturePerfect
         </Navbar.Brand>

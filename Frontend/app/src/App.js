@@ -12,6 +12,7 @@ import Footer from "./Common/Footer/footer";
 import ErrorAlerts from "./Common/Alert/error";
 import * as errors from "./Common/Constants/errorConstants";
 import * as LinkConstants from "./Common/Constants/linkConstants";
+import MovieInfo from "./Catalogue/Movie Info/movieInfo";
 
 //Main Routing Class
 class App extends Component {
@@ -52,8 +53,14 @@ class App extends Component {
                 <Route
                   path={LinkConstants.MOVIE_DESCRIPTION}
                   exact
-                  render={() => {
-                    return <h1>Yet to be implemented</h1>;
+                  render={(props) => {
+                    const movieId = props.match.params.movieid;
+                    if (movieId && (isNaN(movieId) || movieId < 1)) {
+                      return (
+                        <ErrorAlerts>{errors.INVALID_MOVIE_ID}</ErrorAlerts>
+                      );
+                    }
+                    return <MovieInfo movieId={movieId} />;
                   }}
                 />
                 <Route

@@ -42,4 +42,5 @@ func GetParameters(r *http.Request) (int, int, string, string) {
 //EnableCors Function to enable Cors for cross origin API communication
 func EnableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+	(*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
 }

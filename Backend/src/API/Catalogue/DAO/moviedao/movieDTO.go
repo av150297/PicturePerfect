@@ -10,4 +10,7 @@ type Movie struct {
 	Image       string  `json:"poster_path"`
 	Overview    string  `gorm:"type:varchar(1000)" json:"overview"`
 	VoteAverage float32 `json:"vote_average"`
+	Backdrop    string  `json:"backdrop_path"`
+	Tagline     string  `json:"tagline"`
+	Runtime     int     `json:"runtime"`
 }

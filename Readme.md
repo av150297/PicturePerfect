@@ -16,12 +16,12 @@ Third party go packages:
 2. "github.com/davecgh/go-spew/spew"
 3. "github.com/go-sql-driver/mysql"
 4. "github.com/jinzhu/gorm"
+5. "github.com/google/uuid"
+   In the \$GOPATH folder Run:
 
-In the \$GOPATH folder Run:
-
-1. go build
+6. go build
    then src.exe(for windows) or ./src(for linux)
-2. run "npm start" in the "Frontend/app/" folder
+7. run "npm start" in the "Frontend/app/" folder
 
 Third Party Javascript Package:
 
