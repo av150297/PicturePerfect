@@ -13,6 +13,7 @@ import * as LinkConstants from "../../Common/Constants/linkConstants";
 import { Link } from "react-router-dom";
 import Style from "./homePageStyle.js";
 import Backdrop from "../../Common/Backdrop/backdrop";
+import Alert from "../../Common/Alert/error";
 
 const useStyles = makeStyles(Style);
 
@@ -21,94 +22,95 @@ const hompage = (props) => {
   useEffect(() => {
     props.fetchData();
   }, []);
-  let loading = null;
   if (props.loading) {
-    loading = <Backdrop />;
-  }
-  const size = props.movies.length;
-  let movieCards = null;
-  for (let i = 0; i < 6; i++) {
-    if (i < size) {
-      movieCards = (
-        <Aux>
-          {movieCards}
-          <Col>
-            <Card list={props.movies[i]} />
-          </Col>
-        </Aux>
-      );
+    return <Backdrop />;
+  } else if (props.error) {
+    return <Alert>Oops ! Something went wrong</Alert>;
+  } else {
+    const size = props.movies.length;
+    let movieCards = null;
+    for (let i = 0; i < 6; i++) {
+      if (i < size) {
+        movieCards = (
+          <Aux>
+            {movieCards}
+            <Col>
+              <Card list={props.movies[i]} />
+            </Col>
+          </Aux>
+        );
+      }
     }
-  }
-  let showCards = null;
-  for (let i = 0; i < 6; i++) {
-    if (i < size) {
-      showCards = (
-        <Aux>
-          {showCards}
-          <Col>
-            <Card list={props.shows[i]} />
-          </Col>
-        </Aux>
-      );
+    let showCards = null;
+    for (let i = 0; i < 6; i++) {
+      if (i < size) {
+        showCards = (
+          <Aux>
+            {showCards}
+            <Col>
+              <Card list={props.shows[i]} />
+            </Col>
+          </Aux>
+        );
+      }
     }
+    return (
+      <Aux>
+        <Carousels />
+        <Row>
+          <Col>
+            <Paper elevation={2} className={classes.root}>
+              <h3>
+                <strong>Popular Movies</strong>
+              </h3>
+              <Link
+                to={{
+                  pathname: LinkConstants.MOVIE_LIST,
+                  search: "?page=1",
+                }}
+              >
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  className={classes.button}
+                  endIcon={<ArrowForwardIosIcon fontSize="inherit" />}
+                >
+                  More
+                </Button>
+              </Link>
+            </Paper>
+          </Col>
+        </Row>
+        <Row className={classes.row}>{movieCards}</Row>
+        <Row>
+          <Col>
+            <Paper elevation={2} className={classes.root}>
+              <h3>
+                <strong>Popular Tv Shows</strong>
+              </h3>
+              <Link
+                to={{
+                  pathname: LinkConstants.TVSHOWS,
+                  search: "?page=1",
+                }}
+              >
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  className={classes.button}
+                  endIcon={<ArrowForwardIosIcon fontSize="inherit" />}
+                  href="#movielist"
+                >
+                  More
+                </Button>
+              </Link>
+            </Paper>
+          </Col>
+        </Row>
+        <Row className={classes.row}>{showCards}</Row>
+      </Aux>
+    );
   }
-  return (
-    <Aux>
-      <Carousels />
-      {loading}
-      <Row>
-        <Col>
-          <Paper elevation={2} className={classes.root}>
-            <h3>
-              <strong>Popular Movies</strong>
-            </h3>
-            <Link
-              to={{
-                pathname: LinkConstants.MOVIE_LIST,
-                search: "?page=1",
-              }}
-            >
-              <Button
-                variant="outlined"
-                color="primary"
-                className={classes.button}
-                endIcon={<ArrowForwardIosIcon fontSize="inherit" />}
-              >
-                More
-              </Button>
-            </Link>
-          </Paper>
-        </Col>
-      </Row>
-      <Row className={classes.row}>{movieCards}</Row>
-      <Row>
-        <Col>
-          <Paper elevation={2} className={classes.root}>
-            <h3>
-              <strong>Popular Tv Shows</strong>
-            </h3>
-            <Link
-              to={{
-                pathname: LinkConstants.TV_SHOWS,
-                search: "?page=1",
-              }}
-            >
-              <Button
-                variant="outlined"
-                color="primary"
-                className={classes.button}
-                endIcon={<ArrowForwardIosIcon fontSize="inherit" />}
-                href="#movielist"
-              >
-                More
-              </Button>
-            </Link>
-          </Paper>
-        </Col>
-      </Row>
-      <Row className={classes.row}>{showCards}</Row>
-    </Aux>
-  );
 };
 
 const mapStateToProps = (state) => {

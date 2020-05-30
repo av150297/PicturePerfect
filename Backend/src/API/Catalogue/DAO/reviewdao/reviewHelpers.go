@@ -1,42 +1,45 @@
 package reviewdao
 
 import (
-	"log"
 	"utils"
 
 	"github.com/jinzhu/gorm"
 )
 
 //Save function to save the review in the database
-func (reviewList *ReviewList) Save(movieID int) {
+func (reviewList *ReviewList) Save(typeID int, typ string) error {
 	db, dberr := gorm.Open("mysql", utils.DATABASEURL)
 	defer db.Close()
 	if dberr != nil {
-		log.Fatal(dberr)
+		return dberr
 	}
 	db.AutoMigrate(&Review{})
 	for _, review := range reviewList.List {
-		review.MovieID = movieID
+		review.TypeID = typeID
+		review.Type = typ
 		db.Debug().Create(&review)
 	}
+	return nil
 }
 
 //GetReviews function
-func (reviewList *ReviewList) GetReviews(movieID int) {
+func (reviewList *ReviewList) GetReviews(typeID int, typ string) error {
 	db, dberr := gorm.Open("mysql", utils.DATABASEURL)
 	if dberr != nil {
-		log.Fatal(dberr)
+		return dberr
 	}
 	defer db.Close()
-	db.Debug().Where("movie_id=?", movieID).Find(&reviewList.List)
+	db.Debug().Where("type_id=? and type=?", typeID, typ).Find(&reviewList.List)
+	return nil
 }
 
 //Save Function
-func (review *Review) Save() {
+func (review *Review) Save() error {
 	db, dberr := gorm.Open("mysql", utils.DATABASEURL)
 	if dberr != nil {
-		log.Fatal(dberr)
+		return dberr
 	}
 	defer db.Close()
-	db.Debug().Save(review)
+	db.Debug().Create(review)
+	return nil
 }

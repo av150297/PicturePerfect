@@ -2,7 +2,6 @@ package reviewdao
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 	"strconv"
 	"utils"
@@ -14,13 +13,25 @@ import (
 func ReviewsImplementation(w http.ResponseWriter, r *http.Request) {
 	utils.EnableCors(&w)
 	vars := mux.Vars(r)
-	movieID, err := strconv.Atoi(vars["movie_id"])
+	typeID, err := strconv.Atoi(vars["type_id"])
 	if err != nil {
-		//Some HTTP error
-		log.Fatal("String Conversion error")
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	typeQuery, ok := r.URL.Query()["type"]
+	var typ string
+	if ok {
+		typ = typeQuery[0]
+	} else {
+		w.WriteHeader(http.StatusBadRequest)
+		return
 	}
 	var reviewList ReviewList
-	reviewList.GetReviews(movieID)
+	err = reviewList.GetReviews(typeID, typ)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(reviewList)
 }

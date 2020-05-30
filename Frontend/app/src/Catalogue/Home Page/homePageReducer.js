@@ -10,16 +10,11 @@ const initialState = {
 
 const homePageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case homePageActionTypes.FETCH_DATA:
+    case homePageActionTypes.FETCH_DATA_SUCCESS:
       return {
         ...state,
         movies: action.movies,
         shows: action.shows,
-        error: null,
-      };
-    case homePageActionTypes.FETCH_DATA_SUCCESS:
-      return {
-        ...state,
         loading: false,
         error: null,
       };

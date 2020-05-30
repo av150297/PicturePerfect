@@ -13,7 +13,6 @@ func GetParameters(r *http.Request) (int, int, string, string) {
 	search := ""
 	attribute := "title"
 	pageQuery, ok := r.URL.Query()["page"]
-	fmt.Println("Page Query", pageQuery)
 	if ok {
 		pageNumber, strerr := strconv.Atoi(pageQuery[0])
 		if strerr == nil {

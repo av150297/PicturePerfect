@@ -1,9 +1,9 @@
 import * as homePageActionTypes from "./homePageActionTypes";
 import axios from "../../hoc/axios";
 
-export const fetchData = (data) => {
+export const fetchDataSuccess = (data) => {
   return {
-    type: homePageActionTypes.FETCH_DATA,
+    type: homePageActionTypes.FETCH_DATA_SUCCESS,
     movies: data.movies,
     shows: data.shows,
     last_page: data.last_page,
@@ -23,22 +23,13 @@ export const fetchDataError = (error) => {
   };
 };
 
-export const fetchDataSuccess = () => {
-  return {
-    type: homePageActionTypes.FETCH_DATA_SUCCESS,
-  };
-};
-
 export const getData = () => {
   return (dispatch) => {
     dispatch(fetchDataStart());
     axios
       .get("/")
       .then((response) => {
-        dispatch(fetchData(response.data));
-      })
-      .then(() => {
-        dispatch(fetchDataSuccess());
+        dispatch(fetchDataSuccess(response.data));
       })
       .catch((error) => {
         dispatch(fetchDataError(error));

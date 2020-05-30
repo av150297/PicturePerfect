@@ -5,6 +5,13 @@
     height: 100vh;
 }
 
+.root {
+    width: 300px;
+    margin-top: 100x;
+    margin-left: 80px;
+    outline: none;
+}
+
 .content {
     margin-left: 40px;
 }
@@ -12,6 +19,7 @@
 .image_card {
     width: 500px;
     float: left;
+    margin-top: 80px;
     margin-right: 20px;
 }
 
@@ -31,6 +39,13 @@
     background-repeat: no-repeat;
     background-size: cover;
     height: 92vh;
+}
+
+.media {
+    height: 400;
+    width: 100%;
+    outline: "none";
+    z-index: -1;
 }
 
 .image {

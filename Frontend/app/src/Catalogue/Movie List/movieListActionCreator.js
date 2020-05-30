@@ -1,9 +1,9 @@
 import * as movieListActionTypes from "./movieListActionTypes";
 import axios from "../../hoc/axios";
 
-export const fetchMovielist = (data) => {
+export const fetchMovielistSuccess = (data) => {
   return {
-    type: movieListActionTypes.FETCH_MOVIES,
+    type: movieListActionTypes.FETCH_MOVIES_SUCCESS,
     data: data.results,
     last_page: data.last_page,
   };
@@ -22,12 +22,6 @@ export const fetchMovieListError = (error) => {
   };
 };
 
-export const fetchMovieListSuccess = () => {
-  return {
-    type: movieListActionTypes.FETCH_MOVIES_SUCCESS,
-  };
-};
-
 export const getMovieList = (state, type) => {
   return (dispatch) => {
     dispatch(fetchMovieListStart());
@@ -37,10 +31,7 @@ export const getMovieList = (state, type) => {
         params: state,
       })
       .then((response) => {
-        dispatch(fetchMovielist(response.data));
-      })
-      .then(() => {
-        dispatch(fetchMovieListSuccess());
+        dispatch(fetchMovielistSuccess(response.data));
       })
       .catch((error) => {
         dispatch(fetchMovieListError(error));

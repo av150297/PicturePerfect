@@ -12,11 +12,11 @@ const APIKEY = "381193835c01836af08b2b8b05341ae5"
 //APIURL for API
 const APIURL = "https://api.themoviedb.org/3/%s/popular?api_key=%s&page=%d"
 
-//MOVIEAPIURL for movie description
-const MOVIEAPIURL = "https://api.themoviedb.org/3/%s/%d?api_key=%s"
+//INFOAPIURL for movie description
+const INFOAPIURL = "https://api.themoviedb.org/3/%s/%d?api_key=%s"
 
 //REVIEWAPIURL for getting reviews
-const REVIEWAPIURL = "https://api.themoviedb.org/3/movie/%d/reviews?api_key=%s&language=en-US&page=1"
+const REVIEWAPIURL = "https://api.themoviedb.org/3/%s/%d/reviews?api_key=%s&language=en-US&page=1"
 
 //IMAGEBASEURL for poster Images
 const IMAGEBASEURL = "https://image.tmdb.org/t/p/w500/"

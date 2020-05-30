@@ -57,8 +57,8 @@ const movieCard = (props) => {
           <Link
             to={
               props.type === "movies"
-                ? LinkConstants.MOVIE_LIST + "/" + props.item.id
-                : LinkConstants.TV_SHOWS + "/" + props.item.id
+                ? LinkConstants.MOVIE_LIST + props.item.id
+                : LinkConstants.TVSHOWS + props.item.id
             }
             className={classes.link}
           >

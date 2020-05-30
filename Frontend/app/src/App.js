@@ -6,20 +6,23 @@ import MovieList from "./Catalogue/Movie List/movieList";
 import TvshowList from "./Catalogue/Movie List/tvshowList";
 import HomePage from "./Catalogue/Home Page/homePage";
 import NavigationBar from "./Common/Navigation Bar/navigationBar";
-import { MuiThemeProvider } from "@material-ui/core/styles";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import queryString from "query-string";
 import Footer from "./Common/Footer/footer";
 import ErrorAlerts from "./Common/Alert/error";
 import * as errors from "./Common/Constants/errorConstants";
 import * as LinkConstants from "./Common/Constants/linkConstants";
 import MovieInfo from "./Catalogue/Movie Info/movieInfo";
+import TvShowInfo from "./Catalogue/TvShow Info/tvShowInfo";
+
+const theme = createMuiTheme({});
 
 //Main Routing Class
 class App extends Component {
   render() {
     return (
       <Aux>
-        <MuiThemeProvider>
+        <MuiThemeProvider theme={theme}>
           <NavigationBar />
           <div className={classes.main}>
             <div>
@@ -64,7 +67,7 @@ class App extends Component {
                   }}
                 />
                 <Route
-                  path={LinkConstants.TV_SHOWS}
+                  path={LinkConstants.TVSHOWS}
                   exact
                   render={(props) => {
                     let params = queryString.parse(props.location.search);
@@ -87,8 +90,14 @@ class App extends Component {
                 <Route
                   path={LinkConstants.TVSHOW_DESCRIPTION}
                   exact
-                  render={() => {
-                    return <h1>Yet to be implemented</h1>;
+                  render={(props) => {
+                    const showId = props.match.params.showid;
+                    if (showId && (isNaN(showId) || showId < 1)) {
+                      return (
+                        <ErrorAlerts>{errors.INVALID_SHOW_ID}</ErrorAlerts>
+                      );
+                    }
+                    return <TvShowInfo showId={showId} />;
                   }}
                 />
                 <Route

@@ -31,7 +31,7 @@ const pagination = (props) => {
                     pathname:
                       props.type === "movies"
                         ? LinkConstants.MOVIE_LIST
-                        : LinkConstants.TV_SHOWS,
+                        : LinkConstants.TVSHOWS,
                     search:
                       props.search === ""
                         ? paramHandler({ page: item.page })

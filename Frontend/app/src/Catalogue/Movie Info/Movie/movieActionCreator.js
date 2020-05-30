@@ -22,9 +22,9 @@ export const fetchMovieError = (error) => {
 };
 
 export const getMovie = (movieId) => {
-  return async (dispatch) => {
+  return (dispatch) => {
     dispatch(fetchMovieStart());
-    await axios
+    axios
       .get("/movies/catalogue/" + movieId)
       .then((response) => {
         dispatch(fetchMovieSuccess(response.data));

@@ -22,7 +22,7 @@ const searchBar = (props) => {
           pathname:
             props.type === "movies"
               ? LinkConstants.MOVIE_LIST
-              : LinkConstants.TV_SHOWS,
+              : LinkConstants.TVSHOWS,
           search: "?page=1",
         }}
       >
@@ -80,7 +80,7 @@ const searchBar = (props) => {
           pathname:
             props.type === "movies"
               ? LinkConstants.MOVIE_LIST
-              : LinkConstants.TV_SHOWS,
+              : LinkConstants.TVSHOWS,
           search:
             searchBarState !== ""
               ? paramHandler({ search: searchBarState, page: 1 })

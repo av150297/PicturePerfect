@@ -19,7 +19,7 @@ const rating = (props) => {
           value={props.value}
           size="large"
           readOnly
-          precision={0.01}
+          precision={0.1}
           emptyIcon={
             <StarBorderIcon fontSize="inherit" style={{ color: grey[500] }} />
           }

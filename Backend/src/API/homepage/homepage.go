@@ -10,6 +10,10 @@ import (
 func Implementation(w http.ResponseWriter, r *http.Request) {
 	utils.EnableCors(&w)
 	var data Data
-	data.getData(utils.HOMEPAGELIMIT)
+	err := data.getData(utils.HOMEPAGELIMIT)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
 	json.NewEncoder(w).Encode(data)
 }

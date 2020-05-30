@@ -27,6 +27,9 @@ const style = {
   },
   button: {
     outline: "none",
+    "&:focus": {
+      outline: "none",
+    },
   },
   image: {
     backgroundColor: "#000000",

@@ -32,7 +32,7 @@ const navigationBar = (props) => {
           </Link>
           <Link
             to={{
-              pathname: LinkConstants.TV_SHOWS,
+              pathname: LinkConstants.TVSHOWS,
               search: "?page=1",
             }}
             style={style}

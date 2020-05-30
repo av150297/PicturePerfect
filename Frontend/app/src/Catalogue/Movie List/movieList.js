@@ -26,10 +26,6 @@ const movieList = (props) => {
   useEffect(() => {
     props.fetchMovies(state, props.type);
   }, [state, props.type]);
-  let loading = null;
-  if (props.loading) {
-    loading = <Backdrop />;
-  }
   if (params.search !== state.search || params.page !== state.page) {
     if (params.search !== state.search) {
       setState({
@@ -45,67 +41,67 @@ const movieList = (props) => {
       });
     }
   }
-  let searchTitle = null;
-  if (state.search !== "") {
-    searchTitle = (
-      <Typography variant="h6" gutterBottom style={{ marginLeft: 10 }}>
-        Search Result for: <strong>{state.search}</strong>
-      </Typography>
+  if (props.loading) {
+    return <Backdrop />;
+  } else if (props.error) {
+    return <ErrorAlerts>Something went wrong !</ErrorAlerts>;
+  } else {
+    let searchTitle = null;
+    if (state.search !== "") {
+      searchTitle = (
+        <Typography variant="h6" gutterBottom style={{ marginLeft: 10 }}>
+          Search Result for: <strong>{state.search}</strong>
+        </Typography>
+      );
+    }
+
+    return (
+      <Aux>
+        <div className={classes.main}>
+          <Row>
+            <Col>
+              <SearchBar
+                page={state.page}
+                type="movies"
+                state={state}
+                setState={setState}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Select
+                attribute={state.attribute}
+                attributeHandler={(event) =>
+                  Handler.attributeHandler(state, setState, event)
+                }
+                sort={state.sort}
+                sortHandler={(event) =>
+                  Handler.sortHandler(state, setState, event)
+                }
+                type={props.type}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col>{searchTitle}</Col>
+          </Row>
+          <MovieCards data={props.data} type={props.type} />
+
+          <Row>
+            <Col>
+              <Pagination
+                page={state.page}
+                pageCount={props.last_page}
+                search={state.search}
+                type="movies"
+              />
+            </Col>
+          </Row>
+        </div>
+      </Aux>
     );
   }
-  let error_message = null;
-  if (props.error) {
-    error_message = <ErrorAlerts>Something went wrong !</ErrorAlerts>;
-  }
-
-  return (
-    <Aux>
-      <div className={classes.main}>
-        <Row>
-          <Col>
-            <SearchBar
-              page={state.page}
-              type="movies"
-              state={state}
-              setState={setState}
-            />
-          </Col>
-        </Row>
-        {loading}
-        <Row>
-          <Col>
-            <Select
-              attribute={state.attribute}
-              attributeHandler={(event) =>
-                Handler.attributeHandler(state, setState, event)
-              }
-              sort={state.sort}
-              sortHandler={(event) =>
-                Handler.sortHandler(state, setState, event)
-              }
-              type={props.type}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col>{searchTitle}</Col>
-        </Row>
-        {error_message}
-        <MovieCards data={props.data} type={props.type} />
-
-        <Row>
-          <Col>
-            <Pagination
-              page={state.page}
-              pageCount={props.last_page}
-              search={state.search}
-              type="movies"
-            />
-          </Col>
-        </Row>
-      </div>
-    </Aux>
-  );
 };
 
 const mapStateToProps = (state) => {

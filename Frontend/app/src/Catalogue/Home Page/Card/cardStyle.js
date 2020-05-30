@@ -3,6 +3,11 @@ const style = {
     width: 180,
     marginBottom: 10,
     outline: "none",
+    textDecoration: "none",
+    "&:hover": {
+      textDecoration: "none",
+      outline: "none",
+    },
   },
   media: {
     height: 250,
@@ -23,8 +28,11 @@ const style = {
     transitionProperty: "max-height",
     transitionDuration: "0.6s",
     transitionTimingFunction: "ease-in-out",
+    textDecoration: "none",
     "&:hover": {
       maxHeight: 100,
+      textDecoration: "none",
+      outline: "none",
     },
   },
   image: {
