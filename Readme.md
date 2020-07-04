@@ -1,4 +1,4 @@
-For Backend
+For Backend Instruction
 
 SET environment variable \$GOPATH="path_to/e2eproject/Backend/src
 
